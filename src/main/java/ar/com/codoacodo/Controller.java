@@ -7,13 +7,14 @@ import java.time.LocalDateTime;
 import ar.com.codoacodo.dao.impl.DAO;
 import ar.com.codoacodo.dao.impl.MySQLDAOImpl;
 import ar.com.codoacodo.oop.Articulo;
+import ar.com.codoacodo.oop.Libro;
 
 //App.java = Clase java
 public class Controller {
     public static void main(String[] args) throws SQLException {
         
-        //Interface nombre  = new ClaseQueImplementaLaIntarface();
-        DAO dao = new MySQLDAOImpl();
+        //CREATE CONTROLLER 
+
         
         //tendria que tener los parametros del front (<form>)
         String titulo = "titulo del front";
@@ -23,9 +24,14 @@ public class Controller {
         String isbn  = "123465465456";
         LocalDateTime ldt = LocalDateTime.now();
         
+        Articulo nuevo = new Libro(titulo, codigo, autor, precio, false, isbn);
+        
+        //Interface nombre  = new ClaseQueImplementaLaIntarface();
+        DAO dao = new MySQLDAOImpl();
+        
         //puedo usar lo metodos que tiene DAO, sin saber quien cumple el contrato
-        Articulo a = dao.getById(1l);
+        dao.create(nuevo);
 
-        System.out.println(a);
+        System.out.println(nuevo);
     }
 }
