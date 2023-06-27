@@ -13,6 +13,7 @@ public abstract class Articulo {
     protected String autor;
     protected boolean novedad;
     protected LocalDateTime fechaCrecion;
+    protected String codigo;
    
     //constuctor/es
     //si no escribo el constructor, JVM me da uno por defecto
@@ -21,16 +22,19 @@ public abstract class Articulo {
         String imagen,
         String autor,
         double precio,
-        boolean novedad
+        boolean novedad,
+        String codigo,
+        LocalDateTime fechaCreacion
     )
     {
             this.imagen = imagen;
             this.titulo = titulo;
             this.autor = autor;
             this.novedad = false;
-            this.fechaCrecion = LocalDateTime.now();
+            this.fechaCrecion = fechaCreacion;
             this.precio = precio;
             this.novedad = novedad;
+            this.codigo = codigo;
     }
 
     //metodos: va entre llaves
@@ -97,6 +101,14 @@ public abstract class Articulo {
 
     public void setFechaCrecion(LocalDateTime fechaCrecion) {
         this.fechaCrecion = fechaCrecion;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     
