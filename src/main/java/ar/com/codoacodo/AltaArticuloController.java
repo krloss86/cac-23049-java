@@ -10,7 +10,7 @@ import ar.com.codoacodo.oop.Articulo;
 import ar.com.codoacodo.oop.Libro;
 
 //App.java = Clase java
-public class Controller {
+public class AltaArticuloController {
     public static void main(String[] args) throws SQLException {
         
         //CREATE CONTROLLER 
@@ -30,7 +30,11 @@ public class Controller {
         DAO dao = new MySQLDAOImpl();
         
         //puedo usar lo metodos que tiene DAO, sin saber quien cumple el contrato
-        dao.create(nuevo);
+        try {
+            dao.create(nuevo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } //try/catch/finally
 
         System.out.println(nuevo);
     }

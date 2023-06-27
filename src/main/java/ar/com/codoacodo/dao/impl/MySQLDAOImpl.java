@@ -1,7 +1,12 @@
 package ar.com.codoacodo.dao.impl;
 
+//JDBC
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import ar.com.codoacodo.db.AdministradorDeConexiones;
 import ar.com.codoacodo.oop.Articulo;
 import ar.com.codoacodo.oop.Libro;
 
@@ -40,15 +45,24 @@ public class MySQLDAOImpl implements DAO {
     }
 
     @Override
-    public void create(Articulo articulo) {
+    public void create(Articulo articulo) throws Exception {
         String sql = "insert into "+this.tableName;
-        sql += "(titulo,autor,precio,fecha,novedad) ";
-        sql += "values (...,...,...,...,....) ";
-
-        //Obtener la Conection
+        sql += "(titulo,autor,precio,fecha_creacion,novedad) ";
+        sql += "values (?,?,?,?,?) ";
+//                      1 2 3 4 5
+         //Obtener la Conection
+        Connection con = AdministradorDeConexiones.getConnection();
 
         //PreparedStatement con mi sql
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setString(1,articulo.getTitulo());
+        pst.setString(2,articulo.getAutor());
+        pst.setDouble(3,articulo.getPrecio());
+        pst.setDate(4, new java.sql.Date(System.currentTimeMillis()));//fecha LocalDateTime > jdbc > java.sql.Date
+        pst.setInt(5,articulo.isNovedad() ? 1 : 0);        
 
         //RestultSet
+        pst.executeUpdate();//INSERT/UPDATE/DELETE
     }    
 }

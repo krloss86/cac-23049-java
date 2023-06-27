@@ -51,4 +51,53 @@ public abstract class Articulo {
                 + ", novedad=" + novedad + ", fechaCrecion=" + fechaCrecion + "]";
     }
 
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public boolean isNovedad() {
+        return novedad;
+    }
+
+    public void setNovedad(boolean novedad) {
+        this.novedad = novedad;
+    }
+
+    public LocalDateTime getFechaCrecion() {
+        return fechaCrecion;
+    }
+
+    public void setFechaCrecion(LocalDateTime fechaCrecion) {
+        this.fechaCrecion = fechaCrecion;
+    }
+
+    
 }
