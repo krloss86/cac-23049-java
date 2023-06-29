@@ -4,7 +4,9 @@ package ar.com.codoacodo.dao.impl;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -46,9 +48,34 @@ public class MySQLDAOImpl implements DAO {
     }
 
     @Override
-    public ArrayList<Articulo> findAll() {
+    public ArrayList<Articulo> findAll() throws Exception{
         String sql = "select * from "+this.tableName+"";
-        return null;
+
+        //Obtener la Conection
+        Connection con = AdministradorDeConexiones.getConnection();
+
+        //PreparedStatement con mi sql
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        ArrayList<Articulo> listado = new ArrayList<>();
+
+        ResultSet res = pst.executeQuery();
+
+        while(res.next()) {
+            Long id = res.getLong(1);
+            String titulo = res.getString(2);
+            String imagen = res.getString(3);
+            String autor = res.getString(4);
+            String novedad = res.getString(5);
+            Date fechaCreacion = res.getDate(6);
+            String codigo = res.getString(7);
+            Double precio = res.getDouble(8);
+
+            listado.add(new Articulo(id, titulo, imagen, autor, 0, false, codigo, LocalDateTime.now()));
+        }
+        return listado;
+
+        
     }
 
     @Override
@@ -71,7 +98,7 @@ public class MySQLDAOImpl implements DAO {
         pst.setString(1,articulo.getTitulo());
         pst.setString(2,articulo.getAutor());
         pst.setDouble(3,articulo.getPrecio());
-        pst.setDate(4, this.dateFrom(articulo.getFechaCrecion()));//fecha LocalDateTime > jdbc > java.sql.Date
+        pst.setDate(4, this.dateFrom(articulo.getFechaCreacion()));//fecha LocalDateTime > jdbc > java.sql.Date
         pst.setInt(5,articulo.isNovedad() ? 1 : 0);        
         pst.setString(6,articulo.getCodigo());        
 

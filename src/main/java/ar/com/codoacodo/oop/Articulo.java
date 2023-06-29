@@ -4,15 +4,16 @@ import java.time.LocalDateTime;
 
 //todas las clases son hijas de Object
 //nombre
-public abstract class Articulo {
+public class Articulo {
 
     //atributos: convertir a protected
+    protected Long id;
     protected String titulo;
     protected double precio;
     protected String imagen; 
     protected String autor;
     protected boolean novedad;
-    protected LocalDateTime fechaCrecion;
+    protected LocalDateTime fechaCreacion;//alt+shit+r
     protected String codigo;
    
     //constuctor/es
@@ -27,14 +28,34 @@ public abstract class Articulo {
         LocalDateTime fechaCreacion
     )
     {
-            this.imagen = imagen;
-            this.titulo = titulo;
-            this.autor = autor;
-            this.novedad = false;
-            this.fechaCrecion = fechaCreacion;
-            this.precio = precio;
-            this.novedad = novedad;
-            this.codigo = codigo;
+            extracted(titulo, imagen, autor, precio, novedad, codigo, fechaCreacion);
+    }
+
+    public Articulo(
+        Long id,
+        String titulo,
+        String imagen,
+        String autor,
+        double precio,
+        boolean novedad,
+        String codigo,
+        LocalDateTime fechaCreacion
+    )
+    {
+            extracted(titulo, imagen, autor, precio, novedad, codigo, fechaCreacion);
+            this.id = id;
+    }
+
+    private void extracted(String titulo, String imagen, String autor, double precio, boolean novedad, String codigo,
+            LocalDateTime fechaCreacion) {
+        this.imagen = imagen;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.novedad = false;
+        this.fechaCreacion = fechaCreacion;
+        this.precio = precio;
+        this.novedad = novedad;
+        this.codigo = codigo;
     }
 
     //metodos: va entre llaves
@@ -52,7 +73,7 @@ public abstract class Articulo {
     @Override
     public String toString() {
         return "Articulo [titulo=" + titulo + ", precio=" + precio + ", imagen=" + imagen + ", autor=" + autor
-                + ", novedad=" + novedad + ", fechaCrecion=" + fechaCrecion + "]";
+                + ", novedad=" + novedad + ", fechaCreacion=" + fechaCreacion + "]";
     }
 
     public String getTitulo() {
@@ -95,13 +116,6 @@ public abstract class Articulo {
         this.novedad = novedad;
     }
 
-    public LocalDateTime getFechaCrecion() {
-        return fechaCrecion;
-    }
-
-    public void setFechaCrecion(LocalDateTime fechaCrecion) {
-        this.fechaCrecion = fechaCrecion;
-    }
 
     public String getCodigo() {
         return codigo;
@@ -111,5 +125,21 @@ public abstract class Articulo {
         this.codigo = codigo;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+    
     
 }

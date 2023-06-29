@@ -1,3 +1,5 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="ar.com.codoacodo.oop.Articulo" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,15 +35,48 @@
           </div>
         </div>
       </nav>
+    <% 
+     /*codigo java*/
+     ArrayList<Articulo> listado = (ArrayList<Articulo>)request.getAttribute("listado"); //esto es un array
+    %>
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <section>
-                    <h1>CaC #23049 - Proyecto Integrador Java - Crud Articulos</h1>                    
+                    <h1>Listado de Articulos</h1>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Código</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <% 
+                            for(Articulo unarticulo : listado) {
+                            %>
+                                <tr>
+                                    <th scope="row"><%=unarticulo.getId()%></th>
+                                    <td><%=unarticulo.getTitulo()%></td>
+                                    <td><%=unarticulo.getCodigo()%></td>
+                                    <td><%=unarticulo.getPrecio()%></td>
+                                    <td><%=unarticulo.getFechaCreacion()%></td>
+                                    <td>
+                                        <a href="#" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="true">
+                                            Eliminar
+                                        </a>
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                      </table>
                 </section>
             </div>
         </div>
-    </div>
 </body>
 
 </html>
