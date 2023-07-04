@@ -27,21 +27,17 @@ public class ListadoArticuloController extends HttpServlet {
         try {
             ArrayList<Articulo> listado = dao.findAll();
 
-            System.out.println(listado);
-            
             //guardar los datos en el request, es un objeto creado por Tomcat
             req.setAttribute("listado", listado); //idem localStorage
-
-            //redirect
-            getServletContext().getRequestDispatcher("/listado.jsp").forward(req, resp);
         } catch (Exception e) {
             var listado = new ArrayList<>();
             req.setAttribute("listado", listado); //idem localStorage
 
             //error
             req.setAttribute("error", true);
-
-            getServletContext().getRequestDispatcher("/listado.jsp").forward(req, resp);
         } //try/catch/finally
+
+        //redirect
+        getServletContext().getRequestDispatcher("/listado.jsp").forward(req, resp);
     }
 }
