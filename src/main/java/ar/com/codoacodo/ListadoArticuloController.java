@@ -34,7 +34,7 @@ public class ListadoArticuloController extends HttpServlet {
             req.setAttribute("listado", listado); //idem localStorage
 
             //error
-            req.setAttribute("error", true);
+            req.setAttribute("error", e.getMessage() );
         } //try/catch/finally
 
         //redirect
